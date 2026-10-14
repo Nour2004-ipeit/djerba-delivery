@@ -188,7 +188,7 @@ djerba-delivery-backend/
 
 ### 1. Cloner le Répertoire
 ```bash
-git clone https://github.com/<votre-nom-utilisateur>/djerba-delivery.git
+git clone https://github.com/Nour2004-ipeit/djerba-delivery.git
 cd djerba-delivery
 ```
 
