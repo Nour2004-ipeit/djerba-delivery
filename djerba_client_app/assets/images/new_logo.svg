@@ -1,0 +1,29 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Location Pin Outline -->
+    <path d="M100 15 C55 15 20 50 20 95 C20 140 100 190 100 190 C100 190 180 140 180 95 C180 50 145 15 100 15 Z" fill="none" stroke="#0A2540" stroke-width="12" stroke-linejoin="round" />
+    
+    <!-- Inner mask/circle for clipping (optional, but we'll just draw inside) -->
+
+    <!-- Orange Sun -->
+    <!-- Draw a half circle for the sun -->
+    <path d="M60 120 A 40 40 0 0 1 140 120 Z" fill="#F5A623" />
+    
+    <!-- Mosque Body -->
+    <rect x="55" y="120" width="90" height="15" fill="#0A2540" />
+    
+    <!-- Main Dome -->
+    <path d="M65 120 C 65 95, 100 95, 100 120 Z" fill="#0A2540" />
+    
+    <!-- Small Dome -->
+    <path d="M105 120 C 105 105, 125 105, 125 120 Z" fill="#0A2540" />
+    
+    <!-- Minaret -->
+    <rect x="130" y="70" width="8" height="50" fill="#0A2540" />
+    <path d="M128 70 L140 70 L137 65 L131 65 Z" fill="#0A2540" />
+    <path d="M132 65 L136 65 L134 55 Z" fill="#0A2540" />
+    
+    <!-- Birds -->
+    <path d="M130 50 Q 135 45 140 50 Q 145 45 150 50 Q 140 48 130 50 Z" fill="#0A2540" />
+    <path d="M145 35 Q 148 32 151 35 Q 154 32 157 35 Q 151 34 145 35 Z" fill="#0A2540" />
+    <path d="M155 45 Q 157 43 159 45 Q 161 43 163 45 Q 159 44 155 45 Z" fill="#0A2540" />
+</svg>

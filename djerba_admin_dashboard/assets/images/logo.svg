@@ -1,0 +1,47 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Base teal circle -->
+    <circle cx="90" cy="90" r="85" fill="#29C5D9" />
+    
+    <!-- White House Silhouette -->
+    <path d="M25 150 L25 105 Q25 95 35 95 L40 95 L40 85 Q50 65 65 85 L65 95 L70 95 L70 105 L80 105 L80 115 L105 115 L105 125 L125 125 L125 150 Z" fill="white" />
+    
+    <!-- Small blue window -->
+    <rect x="52" y="98" width="6" height="6" fill="#29C5D9" />
+    
+    <!-- Blue door -->
+    <path d="M72 150 L72 125 Q72 110 85 110 Q98 110 98 125 L98 150 Z" fill="#29C5D9" />
+    
+    <!-- Door planks -->
+    <line x1="78" y1="117" x2="78" y2="150" stroke="#1AA5BA" stroke-width="1.5" />
+    <line x1="85" y1="110" x2="85" y2="150" stroke="#1AA5BA" stroke-width="1.5" />
+    <line x1="92" y1="117" x2="92" y2="150" stroke="#1AA5BA" stroke-width="1.5" />
+    
+    <!-- Door handles/knobs -->
+    <circle cx="82" cy="135" r="1.5" fill="white" />
+    <circle cx="88" cy="135" r="1.5" fill="white" />
+    
+    <!-- Palm tree -->
+    <!-- Trunk -->
+    <path d="M125 150 Q135 125 125 90" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" />
+    <!-- Fronds -->
+    <g stroke="white" stroke-linecap="round">
+        <path d="M125 90 Q115 85 95 95" stroke-width="2.5" />
+        <path d="M125 90 Q110 80 95 85" stroke-width="2.5" />
+        <path d="M125 90 Q115 70 100 70" stroke-width="2.5" />
+        <path d="M125 90 Q125 70 115 60" stroke-width="2.5" />
+        <path d="M125 90 Q135 70 135 60" stroke-width="2.5" />
+        <path d="M125 90 Q145 80 155 75" stroke-width="2.5" />
+        <path d="M125 90 Q150 90 160 95" stroke-width="2.5" />
+        <path d="M125 90 Q140 105 145 115" stroke-width="2.5" />
+        
+        <!-- smaller leaves -->
+        <path d="M115 90 L105 97" stroke-width="1.5" />
+        <path d="M112 85 L102 90" stroke-width="1.5" />
+        <path d="M120 80 L110 75" stroke-width="1.5" />
+        <path d="M122 75 L115 65" stroke-width="1.5" />
+        <path d="M128 80 L135 70" stroke-width="1.5" />
+        <path d="M130 85 L145 80" stroke-width="1.5" />
+        <path d="M132 90 L150 90" stroke-width="1.5" />
+        <path d="M130 95 L140 105" stroke-width="1.5" />
+    </g>
+</svg>

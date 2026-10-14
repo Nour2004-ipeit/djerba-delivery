@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Djerba Delivery - Quad View</title>
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #111; color: white; font-family: sans-serif; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; height: 100%; width: 100%; gap: 4px; background: #333; }
+        .cell { display: flex; flex-direction: column; background: #fff; }
+        .header { background: #222; padding: 5px 10px; font-size: 14px; font-weight: bold; display: flex; justify-content: space-between; }
+        iframe { flex: 1; width: 100%; border: none; }
+        a { color: #4dabf7; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="grid">
+        <div class="cell">
+            <div class="header">Client App (8080) <a href="http://localhost:8080" target="_blank">↗</a></div>
+            <iframe src="http://localhost:8080"></iframe>
+        </div>
+        <div class="cell">
+            <div class="header">Restaurant Dashboard (8081) <a href="http://localhost:8081" target="_blank">↗</a></div>
+            <iframe src="http://localhost:8081"></iframe>
+        </div>
+        <div class="cell">
+            <div class="header">Driver App (8082) <a href="http://localhost:8082" target="_blank">↗</a></div>
+            <iframe src="http://localhost:8082"></iframe>
+        </div>
+        <div class="cell">
+            <div class="header">Admin Dashboard (8083) <a href="http://localhost:8083" target="_blank">↗</a></div>
+            <iframe src="http://localhost:8083"></iframe>
+        </div>
+    </div>
+</body>
+</html>

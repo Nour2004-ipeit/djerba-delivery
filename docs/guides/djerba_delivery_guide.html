@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Djerba Delivery — The Definitive Technical & Architectural Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+    @page {
+      size: A4;
+      margin: 13mm 11mm 13mm 11mm;
+      @bottom-right {
+        content: counter(page);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1e293b;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+      font-size: 8.4pt;
+      line-height: 1.5;
+    }
+
+    .page-break {
+      page-break-before: always;
+      break-before: page;
+    }
+
+    .no-break {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* COVER PAGE */
+    .cover {
+      min-height: 980px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 34px 28px;
+      background: linear-gradient(135deg, #060d17 0%, #0c1c33 40%, #082d47 75%, #024761 100%);
+      color: #ffffff;
+      border-radius: 14px;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -100px;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.28) 0%, rgba(14, 165, 233, 0) 70%);
+      border-radius: 50%;
+    }
+
+    .cover-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(14, 165, 233, 0.16);
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      color: #38bdf8;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .cover-title {
+      font-size: 26pt;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.6px;
+      margin: 0 0 10px 0;
+      color: #ffffff;
+    }
+
+    .cover-title span {
+      background: linear-gradient(90deg, #38bdf8 0%, #2dd4bf 50%, #facc15 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cover-subtitle {
+      font-size: 10.5pt;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #cbd5e1;
+      max-width: 620px;
+      margin-bottom: 18px;
+    }
+
+    .cover-tech-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 22px;
+    }
+
+    .tech-pill {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 7.2pt;
+      font-family: 'JetBrains Mono', monospace;
+      color: #94a3b8;
+    }
+
+    .cover-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 7px;
+      padding: 9px 11px;
+    }
+
+    .stat-number {
+      font-size: 13.5pt;
+      font-weight: 800;
+      color: #38bdf8;
+      margin-bottom: 2px;
+    }
+
+    .stat-label {
+      font-size: 6.8pt;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    .cover-meta {
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      font-size: 7.5pt;
+      color: #94a3b8;
+    }
+
+    .meta-item strong {
+      display: block;
+      color: #f1f5f9;
+      font-size: 8.5pt;
+      margin-top: 2px;
+    }
+
+    /* TYPOGRAPHY */
+    h1 {
+      font-size: 14pt;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.4px;
+      margin-top: 0;
+      margin-bottom: 6pt;
+      padding-bottom: 3pt;
+      border-bottom: 2px solid #0284c7;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    h2 {
+      font-size: 10.5pt;
+      font-weight: 700;
+      color: #0369a1;
+      margin-top: 10pt;
+      margin-bottom: 3pt;
+      letter-spacing: -0.2px;
+    }
+
+    h3 {
+      font-size: 9pt;
+      font-weight: 700;
+      color: #0f172a;
+      margin-top: 7pt;
+      margin-bottom: 2pt;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 4pt;
+      text-align: justify;
+    }
+
+    /* CALLOUTS */
+    .callout {
+      border-radius: 7px;
+      padding: 6pt 8pt;
+      margin: 5pt 0;
+      break-inside: avoid;
+    }
+
+    .callout-analogy {
+      background: #f0fdf4;
+      border-left: 3.5px solid #16a34a;
+      color: #14532d;
+    }
+
+    .callout-tech {
+      background: #f0f9ff;
+      border-left: 3.5px solid #0284c7;
+      color: #0c4a6e;
+    }
+
+    .callout-code {
+      background: #f8fafc;
+      border-left: 3.5px solid #6366f1;
+      color: #1e1b4b;
+    }
+
+    .callout-warning {
+      background: #fffbeb;
+      border-left: 3.5px solid #f59e0b;
+      color: #78350f;
+    }
+
+    .callout-title {
+      font-size: 7.8pt;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2pt;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* TABLES */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 5pt 0;
+      font-size: 7.4pt;
+      break-inside: avoid;
+    }
+
+    th {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 4pt 6pt;
+      text-align: left;
+      font-weight: 600;
+      font-size: 7pt;
+      letter-spacing: 0.3px;
+    }
+
+    td {
+      padding: 4pt 6pt;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    /* CODE BLOCKS */
+    .code-block {
+      background: #090d16;
+      border: 1px solid #1e293b;
+      border-radius: 7px;
+      padding: 6pt 8pt;
+      margin: 4pt 0 5pt 0;
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 6.8pt;
+      line-height: 1.45;
+      color: #e2e8f0;
+      break-inside: avoid;
+      overflow-x: auto;
+    }
+
+    .code-header {
+      background: #131b2e;
+      border-top-left-radius: 6px;
+      border-top-right-radius: 6px;
+      padding: 3pt 6pt;
+      margin: -6pt -8pt 4pt -8pt;
+      border-bottom: 1px solid #1e293b;
+      font-size: 6.5pt;
+      color: #38bdf8;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .kw { color: #f43f5e; font-weight: 600; }
+    .fn { color: #38bdf8; }
+    .str { color: #4ade80; }
+    .num { color: #fbbf24; }
+    .cm { color: #64748b; font-style: italic; }
+    .type { color: #c084fc; font-weight: 600; }
+
+    .code-annotation {
+      background: #f1f5f9;
+      border-left: 3px solid #0284c7;
+      padding: 4pt 6pt;
+      margin-top: 3pt;
+      font-size: 7.2pt;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .code-annotation strong {
+      color: #0284c7;
+    }
+
+    /* DIAGRAM BOX */
+    .diagram-box {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 7px;
+      padding: 8pt;
+      margin: 6pt 0;
+      color: #e2e8f0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6.8pt;
+      line-height: 1.35;
+      break-inside: avoid;
+    }
+
+    /* GRIDS */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7pt;
+      margin: 5pt 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 5pt;
+      margin: 5pt 0;
+    }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 7px;
+      padding: 6pt 8pt;
+      break-inside: avoid;
+    }
+
+    .card-highlight {
+      border-top: 2.5px solid #0284c7;
+    }
+
+    .card-title {
+      font-size: 8pt;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2pt;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', Consolas, monospace;
+      font-size: 6.8pt;
+      background: #f1f5f9;
+      color: #0284c7;
+      padding: 1px 3px;
+      border-radius: 3px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .footer {
+      font-size: 6.8pt;
+      color: #94a3b8;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 4pt;
+      margin-top: 8pt;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= COVER PAGE ================= -->
+  <div class="cover">
+    <div class="cover-top">
+      <div class="cover-badge">
+        🏛️ Comprehensive Technical & Architectural Blueprint
+      </div>
+      <h1 class="cover-title">
+        Djerba Delivery<br>
+        <span>Everything Explained From Scratch</span>
+      </h1>
+      <div class="cover-subtitle">
+        A complete, foundational, and code-level walkthrough explaining languages, runtimes, frameworks, APIs, databases, environments, and every single tool in the platform.
+      </div>
+
+      <div class="cover-tech-pills">
+        <span class="tech-pill">Dart & Flutter 3</span>
+        <span class="tech-pill">JS vs TypeScript</span>
+        <span class="tech-pill">Node.js Runtime</span>
+        <span class="tech-pill">Next.js 16 + Hono 4</span>
+        <span class="tech-pill">Drizzle ORM Translator</span>
+        <span class="tech-pill">SQLite Permanent Vault</span>
+        <span class="tech-pill">Redis Mutex Lock</span>
+        <span class="tech-pill">Better-Auth & RBAC</span>
+        <span class="tech-pill">OpenStreetMap GPS</span>
+        <span class="tech-pill">Firebase FCM Pager</span>
+        <span class="tech-pill">Pollinations Generative AI</span>
+      </div>
+
+      <div class="cover-stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">4 Apps</div>
+          <div class="stat-label">Client · Driver · Resto · Admin</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">1 Engine</div>
+          <div class="stat-label">Next.js + Hono Backend</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">&lt; 1 ms</div>
+          <div class="stat-label">In-Memory Route Dispatch</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100% GPS</div>
+          <div class="stat-label">Zero Postal Address Needed</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cover-meta">
+      <div class="meta-item">
+        DOCUMENT TARGET
+        <strong>Executives, Students & Non-Developers</strong>
+      </div>
+      <div class="meta-item">
+        PROJECT TERRITORY
+        <strong>Djerba Island (514 km² Mediterranean Territory)</strong>
+      </div>
+      <div class="meta-item">
+        EDITION
+        <strong>Comprehensive Master Guide 2026</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CHAPTER 1 ================= -->
+  <div class="page-break"></div>
+  <h1><span>01.</span> Core Computing Fundamentals (From Scratch)</h1>
+
+  <h2>1. What is a Programming Language?</h2>
+  <p>
+    A programming language is a structured vocabulary and grammar that humans use to write instructions for computers.
+    In our project, we use <strong>3 distinct languages</strong>:
+    <br>• <strong>Dart:</strong> Google's language used to paint visual buttons, maps, and screens on phones (Flutter).
+    <br>• <strong>TypeScript / JavaScript:</strong> The mathematical calculation language used on our backend server.
+    <br>• <strong>SQL (Structured Query Language):</strong> The universal database language used to fetch and store records.
+  </p>
+
+  <h2>2. JavaScript (JS) vs. TypeScript (TS) — Why Do Both Exist?</h2>
+  <div class="grid-2">
+    <div class="card card-highlight">
+      <div class="card-title">📜 JavaScript (JS): The Flexible Pioneer</div>
+      <p style="font-size:7.4pt; color:#475569; margin:0;">
+        Created in 1995, JS has no strict data types. You can put numbers into a text variable without warning. While fast to write, silly typos and type errors crash the application in front of real users.
+      </p>
+    </div>
+    <div class="card card-highlight">
+      <div class="card-title">🛡️ TypeScript (TS): JavaScript with Armor</div>
+      <p style="font-size:7.4pt; color:#475569; margin:0;">
+        Created by Microsoft, TypeScript adds strict <strong>Types</strong> (e.g. <code>price: number</code>). If you attempt to assign text to a price, <strong>the compiler highlights it in red and refuses to build</strong>, catching bugs before release!
+      </p>
+    </div>
+  </div>
+
+  <h2>3. What is Node.js and What is a "Runtime / Environment"?</h2>
+  <p>
+    A language is just text. To execute it, you need a <strong>Runtime Environment</strong>—a software engine that reads lines of code and translates them into CPU machine instructions (1s and 0s).
+    <br>• <strong>The Historical Constraint (1995–2009):</strong> JavaScript could ONLY run inside web browsers (Chrome, Firefox). It could only animate HTML buttons. It was completely forbidden from touching files or databases.
+    <br>• <strong>The Node.js Breakthrough (2009):</strong> Ryan Dahl extracted Google Chrome's V8 engine into a standalone computer program called <strong>Node.js</strong>.
+    <br>• <strong>The Result:</strong> JavaScript gained the ability to run on Windows/Linux servers, query databases, read disk files, and listen on network ports. Today, TypeScript/Node.js powers server infrastructure at <strong>Netflix, Uber, PayPal, and Airbnb</strong>!
+  </p>
+
+  <h2>4. What are Environment Variables (<code>.env</code>)?</h2>
+  <p>
+    Your server needs secret credentials (database passwords, SMS API keys, session tokens). 
+    <strong>You must never write passwords directly in code files</strong> because publishing code to GitHub would expose them to hackers.
+    Instead, your server reads a hidden file named <code>.env</code> (short for <em>Environment</em>) on startup. The values stay safely in computer memory.
+  </p>
+
+  <h2>5. Framework vs. Library: What's the Difference?</h2>
+  <div class="callout callout-analogy">
+    <div class="callout-title">💡 The Toolbox vs. The House</div>
+    <p style="margin:0;">
+      • <strong>A Library (Toolbox):</strong> A specific tool you call when you need it (e.g., <code>Dio</code> for HTTP requests, <code>Zod</code> for validation). You remain in full control of your application flow.
+      <br>• <strong>A Framework (House):</strong> A pre-built structure with strict architectural rules (e.g., <strong>Flutter</strong> for mobile, <strong>Next.js</strong> for servers). The framework controls the execution flow; you simply write your code in designated folders.
+    </p>
+  </div>
+
+  <h2>6. What is an API (Application Programming Interface)?</h2>
+  <p>
+    An API is a <strong>digital waiter</strong> connecting separate software applications.
+    <br>When you sit at a restaurant (the <strong>Client Mobile App</strong>), you cannot walk into the kitchen yourself (security reasons!). Instead, you give your order to the <strong>Waiter (the API)</strong>. The waiter carries the order to the chef (the <strong>Backend Server & Database</strong>) and brings your food back.
+  </p>
+
+  <h2>7. The Universal Language Rule: Why Dart + TypeScript?</h2>
+  <p>
+    The mobile app (written in <strong>Dart</strong>) and the backend (written in <strong>TypeScript</strong>) do NOT need the same language!
+    They communicate across the internet using <strong>JSON (JavaScript Object Notation)</strong>—plain text formatted like:
+    <code>{"meal": "Couscous", "price": 18.500, "lat": 33.8869}</code>. Both Dart and TypeScript read and write JSON natively!
+  </p>
+
+  <!-- ================= CHAPTER 2 ================= -->
+  <div class="page-break"></div>
+  <h1><span>02.</span> The Frontend Stack (Flutter & Dart Ecosystem)</h1>
+  <p>
+    The frontend is everything the user sees, touches, and interacts with on screen. In our workspace, there are 4 dedicated frontends:
+    <strong>djerba_client_app</strong>, <strong>djerba_driver_app</strong>, <strong>djerba_restaurant_dashboard</strong>, and <strong>djerba_admin_dashboard</strong>.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:20%;">Frontend Tool</th>
+        <th style="width:25%;">Exact Responsibility</th>
+        <th style="width:30%;">Why It Was Chosen</th>
+        <th style="width:25%;">Real-World Analogy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Dart</strong></td>
+        <td>Client-side programming language.</td>
+        <td>Compiles directly to native ARM machine code on smartphones, delivering butter-smooth <strong>60–120 FPS</strong> screen animations.</td>
+        <td>The master painter's specialized brush.</td>
+      </tr>
+      <tr>
+        <td><strong>Flutter 3</strong></td>
+        <td>Google's cross-platform UI framework.</td>
+        <td><strong>Write Once, Run Everywhere:</strong> Compiles the exact same codebase to iOS, Android, and Web simultaneously, avoiding separate development teams.</td>
+        <td>An architectural blueprint that builds in brick, wood, or steel automatically.</td>
+      </tr>
+      <tr>
+        <td><strong>Riverpod</strong></td>
+        <td>Reactive state management engine.</td>
+        <td>Keeps cart items, login status, and active deliveries synchronized across all screens without memory leaks or page reloads.</td>
+        <td>A central stock ticker updating all wall displays simultaneously.</td>
+      </tr>
+      <tr>
+        <td><strong>GoRouter</strong></td>
+        <td>Declarative URL navigation router.</td>
+        <td>Controls smooth transitions between screens (e.g., <code>/login</code> ➔ <code>/home</code> ➔ <code>/tracking</code>) and manages browser deep links.</td>
+        <td>The directional signs guiding travelers through an airport.</td>
+      </tr>
+      <tr>
+        <td><strong>Dio</strong></td>
+        <td>Advanced HTTP networking client.</td>
+        <td>Packs requests, attaches <code>Authorization: Bearer &lt;token&gt;</code> headers automatically, and handles network retries if 4G drops.</td>
+        <td>The armored courier van carrying encrypted documents to the server.</td>
+      </tr>
+      <tr>
+        <td><strong>FlutterMap</strong></td>
+        <td>Open-source map tile renderer.</td>
+        <td><strong>Zero Google Maps fees:</strong> Google charges up to $7 per 1,000 map loads. FlutterMap uses OpenStreetMap at zero cost with high GPS accuracy.</td>
+        <td>A high-resolution laminated map book that never charges subscription fees.</td>
+      </tr>
+      <tr>
+        <td><strong>Geolocator</strong></td>
+        <td>Hardware device GPS bridge.</td>
+        <td>Directly reads real-time latitude, longitude, heading, and speed from the delivery courier's smartphone GPS chip.</td>
+        <td>The digital satellite speedometer mounted on the courier's motorcycle.</td>
+      </tr>
+      <tr>
+        <td><strong>FL_Chart</strong></td>
+        <td>Hardware-accelerated charting library.</td>
+        <td>Renders interactive financial line and bar charts inside the Admin Dashboard for revenue, volume, and courier rankings.</td>
+        <td>A financial analyst's live Wall Street trading terminal.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ================= CHAPTER 3 ================= -->
+  <div class="page-break"></div>
+  <h1><span>03.</span> The Backend Stack (The 10 Tools in djerba_backend)</h1>
+  <p>
+    The backend is the unseen central engine running 24/7 on a server. It has no user interface; it processes calculations, coordinates actors, and manages the database.
+  </p>
+
+  <div class="diagram-box">
+┌────────────────────────────────────────────────────────────────────────┐
+│                   THE COMPLETE ORDER PROCESSING PIPELINE               │
+└────────────────────────────────────────────────────────────────────────┘
+
+ [ 📱 Customer Smartphone (Flutter / Dart) ]
+               │ Sends HTTP Network Request (POST /api/orders)
+               ▼
+ 1. Next.js 16 (The Server Host Environment)
+               │
+               ▼
+ 2. Hono 4 (Ultra-Fast Micro-Router: Routes to ordersRoute in &lt; 1 ms)
+               │
+               ▼
+ 3. Better-Auth (Identity Guard: Verifies the cryptographically signed JWT Token)
+               │
+               ▼
+ 4. Zod Validator (Data Inspector: Ensures cart data contains no bugs or fraud)
+               │
+               ▼
+ 5. Upstash Redis (In-Memory RAM: Prevents courier collision with Mutex locks)
+               │
+               ▼
+ 6. Drizzle ORM (The Translator: Converts TypeScript operations into pure SQL)
+               │
+               ▼
+ 7. SQLite / LibSQL (djerba.db — The Permanent Vault on Disk)
+               │
+               ├──────► 8. Firebase FCM (Wakes up restaurant kitchen tablet)
+               ├──────► 9. Nodemailer (Dispatches email receipts via SMTP)
+               └──────► 10. Pollinations AI (Generates appetizing menu photos)
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:20%;">Backend Tool</th>
+        <th style="width:25%;">Exact Responsibility</th>
+        <th style="width:30%;">Why It Is Essential</th>
+        <th style="width:25%;">Real-World Analogy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Next.js 16</strong></td>
+        <td>Server runtime and compiler.</td>
+        <td>Provides unified compilation, environment management, and production cloud packaging.</td>
+        <td>The commercial delivery truck chassis.</td>
+      </tr>
+      <tr>
+        <td><strong>Hono 4</strong></td>
+        <td>High-speed API micro-router.</td>
+        <td>Routes HTTP network requests in <strong>&lt; 1 ms</strong> instead of 15 ms with legacy frameworks.</td>
+        <td>The high-speed automated mail sorting conveyor.</td>
+      </tr>
+      <tr>
+        <td><strong>Better-Auth</strong></td>
+        <td>Authentication and session suite.</td>
+        <td>Hashes passwords (bcrypt) and generates tamper-proof JWT Bearer session tokens.</td>
+        <td>The passport office stamping verified visas.</td>
+      </tr>
+      <tr>
+        <td><strong>Zod</strong></td>
+        <td>Strict data schema validator.</td>
+        <td>Rejects corrupted or malicious data (e.g. negative prices, missing coordinates) before execution.</td>
+        <td>The security guard checking tickets and inspecting bags.</td>
+      </tr>
+      <tr>
+        <td><strong>Upstash Redis</strong></td>
+        <td>In-memory RAM data store.</td>
+        <td>Provides sub-millisecond <strong>Mutex Locks</strong> to prevent couriers from double-claiming runs.</td>
+        <td>The magnetic board where active courier badges are moved live.</td>
+      </tr>
+      <tr>
+        <td><strong>Drizzle ORM</strong></td>
+        <td>TypeScript-to-SQL translator.</td>
+        <td>Eliminates typo bugs in database columns and prevents SQL injection vulnerabilities.</td>
+        <td>The certified translator turning contracts into legal Latin.</td>
+      </tr>
+      <tr>
+        <td><strong>SQLite (djerba.db)</strong></td>
+        <td>Relational database file on disk.</td>
+        <td>Permanently stores users, restaurants, orders, and financial balances with bank-level ACID reliability.</td>
+        <td>The heavy fireproof safe inside the headquarters.</td>
+      </tr>
+      <tr>
+        <td><strong>Firebase Admin</strong></td>
+        <td>Mobile push notifications (FCM).</td>
+        <td>Rings courier and kitchen phones even when their apps are closed in the background.</td>
+        <td>An emergency pocket alert pager.</td>
+      </tr>
+      <tr>
+        <td><strong>Nodemailer</strong></td>
+        <td>SMTP email dispatcher.</td>
+        <td>Sends password reset OTP codes and receipts through Gmail SMTP.</td>
+        <td>The postal courier delivering certified letters.</td>
+      </tr>
+      <tr>
+        <td><strong>Pollinations AI</strong></td>
+        <td>Generative food photography proxy.</td>
+        <td>Automatically creates appetizing, photorealistic dish pictures for restaurant menus on demand.</td>
+        <td>An on-call food photographer generating catalog art in 3 seconds.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ================= CHAPTER 4 ================= -->
+  <div class="page-break"></div>
+  <h1><span>04.</span> Annotated Code Walkthroughs (Real Production Code)</h1>
+
+  <h2>1. Database Schema & Price Snapshotting (schema.ts)</h2>
+  <div class="code-block">
+    <div class="code-header">
+      <span>📄 djerba_backend/src/db/schema.ts — Order & Items Table</span>
+      <span>Drizzle ORM & TypeScript</span>
+    </div>
+<span class="kw">export const</span> <span class="fn">orders</span> = <span class="fn">sqliteTable</span>(<span class="str">'orders'</span>, {
+  <span class="fn">id</span>: <span class="fn">text</span>(<span class="str">'id'</span>).<span class="fn">primaryKey</span>(), <span class="cm">// Globally unique random fingerprint (UUID)</span>
+  <span class="fn">orderNumber</span>: <span class="fn">text</span>(<span class="str">'order_number'</span>).<span class="fn">unique</span>().<span class="fn">notNull</span>(), <span class="cm">// CMD-839201</span>
+  <span class="fn">clientId</span>: <span class="fn">text</span>(<span class="str">'client_id'</span>).<span class="fn">references</span>(() => <span class="fn">user</span>.<span class="fn">id</span>).<span class="fn">notNull</span>(),
+  <span class="fn">restaurantId</span>: <span class="fn">text</span>(<span class="str">'restaurant_id'</span>).<span class="fn">references</span>(() => <span class="fn">restaurants</span>.<span class="fn">id</span>).<span class="fn">notNull</span>(),
+  <span class="fn">driverId</span>: <span class="fn">text</span>(<span class="str">'driver_id'</span>).<span class="fn">references</span>(() => <span class="fn">user</span>.<span class="fn">id</span>), <span class="cm">// Nullable until a courier claims it!</span>
+  
+  <span class="fn">status</span>: <span class="fn">text</span>(<span class="str">'status'</span>, { 
+    <span class="fn">enum</span>: [<span class="str">'pending'</span>, <span class="str">'accepted'</span>, <span class="str">'preparing'</span>, <span class="str">'ready_for_pickup'</span>, <span class="str">'picked_up'</span>, <span class="str">'arrived_at_place'</span>, <span class="str">'delivered'</span>, <span class="str">'cancelled'</span>] 
+  }).<span class="fn">notNull</span>().<span class="fn">default</span>(<span class="str">'pending'</span>),
+  
+  <span class="fn">subtotal</span>: <span class="fn">real</span>(<span class="str">'subtotal'</span>).<span class="fn">notNull</span>(),
+  <span class="fn">deliveryFee</span>: <span class="fn">real</span>(<span class="str">'delivery_fee'</span>).<span class="fn">notNull</span>(), <span class="cm">// Flat 4.500 TND</span>
+  <span class="fn">totalAmount</span>: <span class="fn">real</span>(<span class="str">'total_amount'</span>).<span class="fn">notNull</span>(),
+  <span class="fn">deliveryAddress</span>: <span class="fn">text</span>(<span class="str">'delivery_address'</span>).<span class="fn">notNull</span>(),
+  <span class="fn">deliveryLat</span>: <span class="fn">real</span>(<span class="str">'delivery_lat'</span>).<span class="fn">notNull</span>(), <span class="cm">// 33.8869</span>
+  <span class="fn">deliveryLng</span>: <span class="fn">real</span>(<span class="str">'delivery_lng'</span>).<span class="fn">notNull</span>(), <span class="cm">// 10.8560</span>
+});
+
+<span class="kw">export const</span> <span class="fn">orderItems</span> = <span class="fn">sqliteTable</span>(<span class="str">'order_items'</span>, {
+  <span class="fn">id</span>: <span class="fn">text</span>(<span class="str">'id'</span>).<span class="fn">primaryKey</span>(),
+  <span class="fn">orderId</span>: <span class="fn">text</span>(<span class="str">'order_id'</span>).<span class="fn">references</span>(() => <span class="fn">orders</span>.<span class="fn">id</span>, { <span class="fn">onDelete</span>: <span class="str">'cascade'</span> }).<span class="fn">notNull</span>(),
+  <span class="fn">productId</span>: <span class="fn">text</span>(<span class="str">'product_id'</span>).<span class="fn">references</span>(() => <span class="fn">products</span>.<span class="fn">id</span>).<span class="fn">notNull</span>(),
+  <span class="cm">// PRICE SNAPSHOTTING: Frozen forever at checkout to survive future menu price hikes</span>
+  <span class="fn">productNameSnapshot</span>: <span class="fn">text</span>(<span class="str">'product_name_snapshot'</span>).<span class="fn">notNull</span>(),
+  <span class="fn">unitPriceSnapshot</span>: <span class="fn">real</span>(<span class="str">'unit_price_snapshot'</span>).<span class="fn">notNull</span>(),
+  <span class="fn">quantity</span>: <span class="fn">integer</span>(<span class="str">'quantity'</span>).<span class="fn">notNull</span>(),
+});
+  </div>
+
+  <h2>2. Pricing Calculation & Atomic Transaction (orders.ts)</h2>
+  <div class="code-block">
+    <div class="code-header">
+      <span>📄 djerba_backend/src/server/routes/orders.ts — Server-Side Pricing</span>
+      <span>Anti-Tampering & Atomicity</span>
+    </div>
+<span class="cm">// 1. DISCARD client prices! Query verified prices from SQLite database:</span>
+<span class="kw">const</span> <span class="fn">productIds</span> = body.<span class="fn">items</span>.<span class="fn">map</span>(i => i.<span class="fn">productId</span>);
+<span class="kw">const</span> <span class="fn">dbProducts</span> = <span class="kw">await</span> <span class="fn">db</span>.<span class="fn">select</span>().<span class="fn">from</span>(<span class="fn">products</span>).<span class="fn">where</span>(<span class="fn">inArray</span>(<span class="fn">products</span>.<span class="fn">id</span>, productIds));
+
+<span class="kw">let</span> <span class="fn">subtotal</span> = <span class="num">0</span>;
+<span class="kw">for</span> (<span class="kw">const</span> <span class="fn">item</span> <span class="kw">of</span> body.<span class="fn">items</span>) {
+  <span class="kw">const</span> <span class="fn">dbProduct</span> = dbProducts.<span class="fn">find</span>(p => p.<span class="fn">id</span> === item.<span class="fn">productId</span>);
+  subtotal += dbProduct.<span class="fn">price</span> * item.<span class="fn">quantity</span>;
+}
+
+<span class="kw">const</span> <span class="fn">deliveryFee</span> = <span class="num">4.500</span>; <span class="cm">// Flat Djerba fee</span>
+<span class="kw">const</span> <span class="fn">totalAmount</span> = subtotal + deliveryFee;
+
+<span class="cm">// 2. ATOMIC TRANSACTION: Both order and items are saved together, or nothing is</span>
+<span class="kw">await</span> <span class="fn">db</span>.<span class="fn">transaction</span>(<span class="kw">async</span> (tx) => {
+  <span class="kw">await</span> tx.<span class="fn">insert</span>(<span class="fn">orders</span>).<span class="fn">values</span>({ ... });
+  <span class="kw">await</span> tx.<span class="fn">insert</span>(<span class="fn">orderItems</span>).<span class="fn">values</span>(itemsWithOrderId);
+});
+  </div>
+
+  <h2>3. The Redis Mutex Collision Guard (dispatch.ts)</h2>
+  <div class="code-block">
+    <div class="code-header">
+      <span>📄 djerba_backend/src/server/services/dispatch.ts — Atomic Lock</span>
+      <span>Concurrency Control</span>
+    </div>
+<span class="kw">export class</span> <span class="type">DispatchService</span> {
+  <span class="kw">static async</span> <span class="fn">lockOrder</span>(<span class="fn">orderId</span>: <span class="type">string</span>, <span class="fn">driverId</span>: <span class="type">string</span>): <span class="type">Promise</span>&lt;<span class="type">boolean</span>&gt; {
+    <span class="cm">// SET NX: "Set if Not eXists" (Succeeds only if key is currently free)</span>
+    <span class="cm">// EX 10: "Expire in 10 seconds" (Auto-clears lock if driver phone disconnects)</span>
+    <span class="kw">const</span> <span class="fn">acquired</span> = <span class="kw">await</span> redis.<span class="fn">set</span>(
+      <span class="str">`lock:order:${orderId}`</span>, 
+      driverId, 
+      { <span class="fn">nx</span>: <span class="kw">true</span>, <span class="fn">ex</span>: <span class="num">10</span> }
+    );
+    <span class="kw">return</span> acquired !== <span class="kw">null</span>;
+  }
+}
+  </div>
+
+  <!-- ================= CHAPTER 5 ================= -->
+  <div class="page-break"></div>
+  <h1><span>05.</span> Financial Model & Multi-App Testing (Quad View)</h1>
+
+  <h2>The Financial Split (15% Platform Commission)</h2>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-title">1. Meal Items (30.000 TND)</div>
+      <p style="font-size:7.4pt; color:#475569; margin:0;">
+        The restaurant receives <strong>25.500 TND</strong> (85%). The platform retains <strong>4.500 TND</strong> (15% commission fee).
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-title">2. Delivery Fee (4.500 TND)</div>
+      <p style="font-size:7.4pt; color:#475569; margin:0;">
+        A flat delivery fare paid by the customer for island transport, credited directly to the driver's earnings.
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-title">3. Cash on Delivery (COD)</div>
+      <p style="font-size:7.4pt; color:#475569; margin:0;">
+        Customer hands <strong>34.500 TND</strong> in cash to the courier. The courier's digital pouch records this cash balance for weekly reconciliation.
+      </p>
+    </div>
+  </div>
+
+  <h2>How to Test All 4 Apps Simultaneously (Quad View)</h2>
+  <p>
+    The included <code>quad_view.html</code> file allows you to test the entire platform lifecycle live on a single computer screen:
+    <br><strong>Step 1:</strong> In <code>djerba_backend</code>, launch the server: <code>npm run dev</code>
+    <br><strong>Step 2:</strong> Double-click <code>quad_view.html</code> to open it in Google Chrome or any browser.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Viewport Quadrant</th>
+        <th>Application</th>
+        <th>Local Port</th>
+        <th>What You Test Live</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Top-Left</strong></td>
+        <td>Customer App</td>
+        <td><code>http://localhost:8080</code></td>
+        <td>Browse food items, drop GPS pin on map, submit live order.</td>
+      </tr>
+      <tr>
+        <td><strong>Top-Right</strong></td>
+        <td>Restaurant Kitchen</td>
+        <td><code>http://localhost:8081</code></td>
+        <td>Listen to incoming chime, accept order, toggle to cooking.</td>
+      </tr>
+      <tr>
+        <td><strong>Bottom-Left</strong></td>
+        <td>Courier Driver</td>
+        <td><code>http://localhost:8082</code></td>
+        <td>Claim delivery run, view route navigation, tap "Delivered".</td>
+      </tr>
+      <tr>
+        <td><strong>Bottom-Right</strong></td>
+        <td>Super Admin</td>
+        <td><code>http://localhost:8083</code></td>
+        <td>Watch revenues, 15% commissions, and courier locations update in real time.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Master Vocabulary Cheat-Sheet</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:25%;">Term</th>
+        <th style="width:75%;">What It Really Means</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Dart</strong></td>
+        <td>The compiled language used to write the mobile visual screens.</td>
+      </tr>
+      <tr>
+        <td><strong>Flutter 3</strong></td>
+        <td>The Google engine that paints buttons, animations, and maps on iOS, Android, and Web.</td>
+      </tr>
+      <tr>
+        <td><strong>TypeScript (TS)</strong></td>
+        <td>JavaScript with compile-time type-safety that prevents 95% of software bugs.</td>
+      </tr>
+      <tr>
+        <td><strong>Node.js</strong></td>
+        <td>The runtime engine that allows JavaScript/TypeScript to run outside browsers as a server.</td>
+      </tr>
+      <tr>
+        <td><strong>Next.js 16</strong></td>
+        <td>The full-stack framework hosting our server process and environment keys.</td>
+      </tr>
+      <tr>
+        <td><strong>Hono 4</strong></td>
+        <td>The ultra-fast micro-router sorting HTTP requests in under 1 millisecond.</td>
+      </tr>
+      <tr>
+        <td><strong>API</strong></td>
+        <td>The digital messenger carrying data between phones and the central server.</td>
+      </tr>
+      <tr>
+        <td><strong>JSON</strong></td>
+        <td>The universal plain text language used between Dart and TypeScript.</td>
+      </tr>
+      <tr>
+        <td><strong>Drizzle ORM</strong></td>
+        <td>The translator turning safe TypeScript operations into optimized SQL database commands.</td>
+      </tr>
+      <tr>
+        <td><strong>SQLite (<code>djerba.db</code>)</strong></td>
+        <td>The permanent relational filing cabinet on disk storing all users, menus, and orders.</td>
+      </tr>
+      <tr>
+        <td><strong>Upstash Redis</strong></td>
+        <td>In-memory RAM store used for real-time courier GPS tracking and collision-prevention locks.</td>
+      </tr>
+      <tr>
+        <td><strong>Mutex Lock</strong></td>
+        <td>The atomic rule guaranteeing that when two drivers tap "Accept", only one gets the delivery.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <span>Djerba Delivery • The Definitive Technical & Architectural Guide</span>
+    <span>École Nationale d'Électronique et des Télécommunications de Sfax (ENET'Com)</span>
+  </div>
+
+</body>
+</html>
