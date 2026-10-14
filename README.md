@@ -1,7 +1,8 @@
 <div align="center">
 
 # 🏝️ Djerba Delivery
-### Plateforme Intelligente Multi-Acteurs de Livraison Logistique Insulaire en Temps Réel
+### منصة ذكية لإدارة وتتبع التوصيل اللوجستي في جزيرة جربة في الوقت الفعلي
+#### Plateforme Intelligente Multi-Acteurs de Livraison Logistique Insulaire en Temps Réel
 
 [![Next.js](https://img.shields.io/badge/Next.js-16.2-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?style=for-the-badge&logo=flutter)](https://flutter.dev/)
@@ -18,30 +19,46 @@
   <b>Entreprise d'accueil :</b> Loomens (Cyberparc Djerba) &nbsp;|&nbsp; <b>Encadrant :</b> Ayoub Jrab
 </p>
 
-[🎥 Vidéo Démo](#-démonstration-vidéo--supports) • [📊 Slides Soutenance](#-slides-de-soutenance) • [🏛️ Architecture](#-architecture-système-n-tiers) • [📱 Les 4 Applications](#-les-4-applications-de-lécosystème) • [⚡ Démarrage](#-guide-de-démarrage-rapide)
+[📖 نبذة بالعربية](#-نبذة-عن-المشروع-overview-in-arabic) • [📊 Diaporama](#-documentation--diaporama) • [🏛️ Architecture](#-architecture-système-n-tiers) • [📱 Les 4 Applications](#-les-4-applications-de-lécosystème) • [⚡ Démarrage](#-guide-de-démarrage-rapide)
 
 ---
 
 </div>
 
-## 📌 Contexte & Problématique Insulaire
+## 🇹🇳 نبذة عن المشروع (Overview in Arabic)
 
-L'île de Djerba (514 km²) présente des spécificités territoriales et économiques majeures qui rendent les solutions de livraison traditionnelles (Yassir, Glovo) inadaptées :
-- **Absence d'adressage cadastral officiel :** Pistes sablonneuses, Menzels traditionnels isolés, et absence de numérotation de rue exploitable entraînant 30 à 60 minutes de retard moyen par indications orales téléphoniques.
-- **Forte saisonnalité & concentration hôtelière :** Triplement de la population en période estivale avec un afflux massif de résidents temporaires dans les complexes hôteliers de Midoun et de la Zone Touristique.
-- **Souveraineté des coûts d'API :** Dépendance critique des solutions existantes envers Google Maps facturé en devises étrangères, insoutenable pour une jeune pousse locale.
-- **Modèle économique lourd :** Commissions prélevées de 25% à 35% asphyxiant les restaurateurs insulaires.
+<div dir="rtl" align="right">
 
-**Djerba Delivery** résout cette équation via une architecture souveraine couplant cartographie open-source (**OpenStreetMap / Leaflet** à 0 € de surcoût d'API), algorithmes spatiaux temps réel (**Upstash Redis GEO**), modèle unilatéral anti-collision de commande, et intégration d'**IA générative culinaire**.
+**Djerba Delivery** هي منصة رقمية لوجستية متكاملة ومفتوحة المصدر لإدارة وتتبع عمليات التوصيل في جزيرة جربة في الوقت الفعلي.
+تجمع المنصة بين أربعة تطبيقات مترابطة تم تطويرها بتقنية **Flutter 3**، مدعومة بنظام خلفي عالي الأداء يعتمد على **Next.js 16** و **Hono v4** وقواعد بيانات **LibSQL (Turso)** و **Upstash Redis**.
+
+### 🌟 أبرز مميزات المنصة:
+- 📱 **تطبيق الحريف (Client App):** تجربة مستخدم سلسة وعصرية، تحديد مباشر ودقيق للموقع عبر الخريطة (OpenStreetMap)، مع دعم خاص للفنادق والمناطق السياحية (اختيار الفندق ورقم الغرفة بكل سهولة).
+- 🛵 **تطبيق عامل التوصيل (Driver App):** واجهة مريحة ومصممة للتحكم بيد واحدة أثناء قيادة الدراجة النارية، مزودة برادار مكاني ذكي يحدد الطلبات القريبة في نطاق 5 كم في أقل من 15 مللي ثانية.
+- 👨‍🍳 **لوحة تحكم المطاعم (Restaurant Dashboard):** إدارة تفاعلية فورية للطلبات (نظام Kanban)، وإمكانية توليد صور عالية الجودة للأطباق المحلية باستخدام تقنيات الذكاء الاصطناعي التوليدي (Pollinations AI).
+- 🛡️ **لوحة التحكم المركزية (Super-Admin):** متابعة شاملة للأسطول وحركة التوصيل عبر الجزيرة مع نموذج عمولة شفاف ومدروس (15%) لدعم أصحاب المشاريع والمطاعم المحلية.
+
+</div>
 
 ---
 
-## 🎥 Démonstration Vidéo & Supports
+## 📌 Vision & Contexte du Projet
+
+L'île de Djerba (514 km²), joyau culturel et touristique de la Méditerranée, bénéficie d'une vitalité remarquable caractérisée par une alliance harmonieuse entre centres d'activité (Houmt Souk, Midoun), complexes hôteliers et habitations insulaires traditionnelles (Menzels).
+
+**Djerba Delivery** a été conçu pour valoriser cet écosystème en créant une plateforme technologique moderne, fluide et respectueuse des spécificités insulaires :
+- **Expérience Touristique & Hôtelière Intuitive :** Un système sur-mesure permettant aux vacanciers de commander avec une sélection directe de l'hôtel et du numéro de chambre, en complément du repérage GPS cartographique OpenStreetMap.
+- **Souveraineté & Performance Économique :** Exploitation d'outils cartographiques ouverts (**OpenStreetMap / Leaflet**), garantissant 0 € de surcoût d'API récurrent pour l'écosystème local.
+- **Partenariat Équitable avec les Restaurateurs :** Modèle tarifaire juste et transparent (commission de 15% contre 25% à 35% sur les plateformes généralistes).
+- **Valorisation Numérique du Patrimoine Culinaire :** Module d'enrichissement par IA pour sublimer les cartes des restaurants djerbiens.
+
+---
+
+## 📚 Documentation & Diaporama
 
 | Ressource | Emplacement / Format | Description |
 | :--- | :--- | :--- |
-| **🎬 Démo Complète** | `demo.mp4` *(124 Mo - Bureau / Releases)* | Enregistrement de la séquence transactionnelle de bout en bout sur les 4 terminaux synchronisés. |
-| **📑 Diaporama Officiel** | [`docs/presentation/Soutenance_Djerba_Delivery_2026.pdf`](docs/presentation/Soutenance_Djerba_Delivery_2026.pdf) | Présentation de soutenance (18 slides haute fidélité sans filigrane). |
+| **📑 Diaporama Officiel** | [`docs/presentation/Soutenance_Djerba_Delivery_2026.pdf`](docs/presentation/Soutenance_Djerba_Delivery_2026.pdf) | Présentation de soutenance (18 diapositives haute fidélité). |
 | **📘 Guide Maître Backend** | [`docs/guides/Djerba_Backend_Master_Guide.pdf`](docs/guides/Djerba_Backend_Master_Guide.pdf) | Spécification technique approfondie de l'API Hono/Next.js, schémas Drizzle et flux Redis. |
 | **📗 Guide d'Intégration** | [`docs/guides/Djerba_Delivery_Project_Guide.pdf`](docs/guides/Djerba_Delivery_Project_Guide.pdf) | Manuel complet de déploiement et d'architecture des 4 applications Flutter. |
 
@@ -85,7 +102,7 @@ graph TD
 ## 📱 Les 4 Applications de l'Écosystème
 
 ### 1. Application Client (Flutter Web & Mobile)
-Conçue sur-mesure pour les résidents et vacanciers avec pointage GPS direct sur carte OpenStreetMap et bascule automatique « Livraison Hôtel » (Sélection de l'hôtel + n° de chambre sans ambiguïté).
+Conçue sur-mesure pour les résidents et les vacanciers avec pointage direct sur carte OpenStreetMap et bascule automatique « Livraison Hôtel » (Sélection de l'hôtel + n° de chambre sans ambiguïté).
 
 <div align="center">
   <img src="report_screenshots/client_app/04_client_home.png" width="30%" alt="Accueil Client"/>
@@ -94,7 +111,7 @@ Conçue sur-mesure pour les résidents et vacanciers avec pointage GPS direct su
 </div>
 
 ### 2. Application Livreur / Courier (Flutter Mobile)
-Ergonomie pensée pour l'usage à une main au guidon de scooter : stepper linéaire à action contextuelle unique, radar spatial de courses disponibles, guidage cartographique et prise d'appel client directe.
+Ergonomie pensée pour l'usage à une main au guidon : stepper linéaire à action contextuelle unique, radar spatial de courses disponibles, guidage cartographique et prise d'appel client directe.
 
 <div align="center">
   <img src="report_screenshots/driver_app/02_driver_dashboard_earnings.png" width="30%" alt="Dashboard Livreur"/>
@@ -126,7 +143,7 @@ Pilotage global des flux logistiques insulaires, gestion des utilisateurs, valid
 ### 📡 1. Radar Spatial 5 km (Upstash Redis GEO)
 - Les coursiers actifs transmettent leurs coordonnées géographiques toutes les 15 secondes via `GEOADD`.
 - Un mécanisme d'éviction automatique avec TTL de 300 s exclut silencieusement tout coursier inactif.
-- Dès qu'une commande passe à l'état `ready_for_pickup`, le backend déclenche un `GEOSEARCH` à rayon de 5 km exécuté en mémoire en **moins de 15 millisecondes**, notifiant uniquement les livreurs pertinents.
+- Dès qu'une commande passe à l'état `ready_for_pickup`, le backend déclenche un `GEOSEARCH` à rayon de 5 km exécuté en mémoire en **moins de 15 millisecondes**, notifiant uniquement les coursiers les plus proches.
 
 ### 🔒 2. Mutex Distribué Anti-Collision (`SET NX EX 10`)
 Pour prévenir les conflits d'acceptation simultanée lorsque plusieurs coursiers cliquent en même temps sur une nouvelle course :
@@ -148,7 +165,7 @@ pending (0) ➔ accepted (1) ➔ preparing (2) ➔ ready_for_pickup (3) ➔ pick
 *Toute tentative de régression (ex: tentative de repasser de `delivered` vers `preparing`) est immédiatement rejetée avec une erreur HTTP 400 Bad Request.*
 
 ### 🎨 4. IA Culinaire Générative (Pollinations AI + Cache HTTP)
-Permet à n'importe quel petit gargotier ou restaurateur local de générer instantanément des photographies professionnelles et appétissantes de ses spécialités méditerranéennes sans engager de photographe professionnel, avec mise en cache CDN (`max-age=31536000`).
+Permet aux restaurateurs de générer instantanément des visuels de haute qualité de leurs spécialités méditerranéennes avec mise en cache CDN (`max-age=31536000`).
 
 ---
 
@@ -233,5 +250,5 @@ Ce projet a été conçu et réalisé dans le cadre du **Stage de Perfectionneme
 
 ---
 <div align="center">
-  <i>Développé avec passion pour l'île des rêves, Djerba.</i>
+  <i>Développé avec fierté pour l'île des rêves, Djerba 🏝️🇹🇳</i>
 </div>
