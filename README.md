@@ -14,8 +14,7 @@
 
 <p align="center">
   <b>Engineering Degree Advanced Internship (GEC2, 2025–2026)</b><br>
-  <b>Author:</b> Nour BEN DAOUED &nbsp;|&nbsp; <b>Institution:</b> ENET'Com Sfax<br>
-  <b>Host Organization:</b> Loomens (Cyberparc Djerba) &nbsp;|&nbsp; <b>Industrial Supervisor:</b> Ayoub Jrab
+  <b>Author:</b> Nour BEN DAOUED &nbsp;|&nbsp; <b>Institution:</b> ENET'Com Sfax &nbsp;|&nbsp; <b>Host Organization:</b> Loomens (Cyberparc Djerba)
 </p>
 
 [📌 Project Vision](#-project-vision--context) • [📑 Slides & Docs](#-documentation--presentation-slides) • [🏛️ System Architecture](#-n-tier-system-architecture) • [📱 The 4 Ecosystem Apps](#-the-4-ecosystem-applications) • [🚀 Quick Start](#-quick-start-guide)
@@ -228,7 +227,7 @@ Then open the synchronized multi-window interface:
 This engineering project was conceptualized and developed as part of the **Advanced Engineering Practical Internship (GEC2)** at the **National School of Electronics and Telecommunications of Sfax (ENET'Com)**, in collaboration with **Loomens** (Cyberparc Djerba).
 
 - **Author:** Nour BEN DAOUED
-- **Industrial Supervisor:** Ayoub Jrab (Loomens)
+- **Host Organization:** Loomens (Cyberparc Djerba)
 - **Academic Year:** 2025–2026 / 2026–2027
 
 ---
